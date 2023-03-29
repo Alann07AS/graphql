@@ -10,9 +10,9 @@ const newGraph = new GraphSVG(`{
     "MinY": 10,
     "MaxX": 100,
     "MaxY": 100,
-    "Curve": [
-        [{"X":0, "Y":0, "R":1, "Title": "titlePoint1", "StyleCurve":{"Color": "red"}},
-        {"X":3, "Y":3, "R":1, "Title": "titlePoint2", "StyleCurve":{"Color": "blue"}}]
+    "Curves": [
+        [{"X":30, "Y":0, "R":10, "Title": "titlePoint1", "Css":{"Color": "red"}},
+        {"X":60, "Y":30, "R":10, "Title": "titlePoint2", "Css":{"Color": "blue"}}]
     ]
 }
 `, div)
