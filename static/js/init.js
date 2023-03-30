@@ -11,8 +11,11 @@ const newGraph = new GraphSVG(`{
     "MaxX": 100,
     "MaxY": 100,
     "Curves": [
-        [{"X":30, "Y":0, "R":10, "Title": "titlePoint1", "Css":{"Color": "red"}},
-        {"X":60, "Y":30, "R":10, "Title": "titlePoint2", "Css":{"Color": "blue"}}]
+        [{"X":20, "Y":0, "R":10, "Title": "titlePoint0", "Css":"fill: white;"},
+        {"X":30, "Y":10, "R":10, "Title": "titlePoint1", "Css":"fill: red;"},
+        {"X":60, "Y":30, "R":10, "Title": "titlePoint2", "Css":"fill: blue;"},
+        {"X":90, "Y":40, "R":10, "Title": "titlePoint3", "Css":"fill: green;"}
+        ]
     ]
 }
 `, div)

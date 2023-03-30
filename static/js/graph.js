@@ -54,12 +54,27 @@ class GraphSVG {
             this.createText(this.TitleX, w/2 , (h+o.y)/2, "", ""),
             this.createText(this.Title, w/2 , (h-o.y)/2, "", "font-weight: 900;"),
         )
+
         this.addToSvg(LegendG)
         this.Data.Curves.forEach((c)=>{
+
+            const Xs = c.map((p)=>{
+                return p.X
+            })
+            const Ys = c.map((p)=>{
+                return p.Y
+            })
+            const echellX = (w*0.9)/(Math.max(...Xs) - Math.min(...Xs))
+            const echellY = (h*0.9)/(Math.max(...Ys) - Math.min(...Ys))
+            const ofsetX = (w*0.05)
+            const ofsetY = (h*0.05)
+            const minX = Math.min(...Xs)
+            const minY = Math.min(...Ys)
+
             const Graph = this.createGroup(
-                this.createPath("", ...c.map((p)=>{return [p.X, p.Y]}).flat()),
+                this.createPath("", ...c.map((p)=>{return [(p.X-minX)*echellX+ofsetX, this.APY(echellY, p.Y-minY, h, ofsetY)]}).flat()),
                 ...c.map((p)=>{
-                    return this.createPoint(p.X, p.Y, p.R, p.Title, p.OnClick, p.Css)
+                    return this.createPoint((p.X-minX)*echellX+ofsetX, this.APY(echellY, p.Y-minY, h, ofsetY), p.R, p.Title, p.OnClick, p.Css)
                 })    
             )
             this.addToSvg(Graph)
@@ -93,13 +108,15 @@ class GraphSVG {
 
     createPath(css, ...path){
         const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        p.setAttribute("style", css)
-        var compt = 0
-        p.setAttribute("d", "M"+path.reduce((acc, currentValue)=>{
-            compt+=0.5
-            console.log(acc + compt%1>0?" ":" L " +currentValue); £dq ICI
-            return acc + compt%1>0?" ":" L " +currentValue
-        }))
+        p.setAttribute("style", "fill: none; stroke: red; stroke-width: 4;"+css)
+        var compt = 0.5
+        const p1 = path[0], p2 = path[1]
+
+        p.setAttribute("d", path.splice(2).reduce((acc, currentValue)=>{
+            compt+=1/2
+            if (compt === 1) compt = 0
+            return acc.concat(compt%1>0?" ":" L ", currentValue.toString())
+        }, "M ".concat(p1.toString(), " ", p2.toString())))
         return p
     }
 
@@ -121,6 +138,13 @@ class GraphSVG {
         l.setAttribute("y2", y2)
         l.setAttribute("style", css)
         return l
+    }
+    /**
+     * Apply echelle
+     */
+    APY(echel, y, h, ofsetY) {
+        console.log(y, h, h - y*echel);
+        return (h - y*echel)-ofsetY
     }
 }
 
