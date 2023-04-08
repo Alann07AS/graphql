@@ -10,19 +10,19 @@
     <title>Z01_Profile_Viewer</title>
 </head>
 <body>
-    <div id="graphtest"></div>
-    <style>
-        #graphtest {
-            height: 80%;
-            width: 80%;
-            border: solid 4px;
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+    <main id="login" style="visibility: hidden;">
+        <form id="login-form">
+            <img src="./static/img/z01icon.png" alt="">
+            <label for="username-email">Username/Email:</label>
+            <input type="text" id="username-email" name="username-email"><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <span id="login-err"></span>
+            <input type="submit" value="Log in">
+        </form>
+    </main>
+    <main id="profil" style="visibility: hidden;">
+
+    </main>
 </body>
 </html>

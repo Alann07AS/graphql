@@ -1,9 +1,30 @@
+:root {
+    --color-green: #9bcb48;
+}
+
 body, html {
     margin: 0;
     height: 100vh;
     width: 100vw;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--color-green);
 }
 
 body {
     background-image: url(../img/greyback.png);
+}
+
+#login, #login > form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login > form > * {
+    margin: 12px;
+    text-decoration: underline;
+    border-radius: 5px;
 }
