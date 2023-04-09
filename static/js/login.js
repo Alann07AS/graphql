@@ -1,3 +1,4 @@
+import { LoadGraph } from "./allgraph.js";
 import { Login } from "./graphQL.js"
 
 export function initLogin() {
@@ -5,6 +6,7 @@ export function initLogin() {
 }
 
 const loginForm = document.getElementById("login-form")
+const profil = document.getElementById("profil")
 
 loginForm.addEventListener("submit", (e)=>{
     e.preventDefault()
@@ -18,14 +20,18 @@ export function LoginErr(err) {
 export function CheckLogin() {
     const login = document.getElementById("login")
     if (getCookie("jwt") !=="") {
-        login.removeChild(loginForm)
+        document.body.removeChild(login)
+        document.getElementById("title").innerText = `Welecome: ${getCookie("userLogin")}`
+        document.getElementById("logout").onclick = ()=>{deletCookie("userLogin"), deletCookie("jwt"); window.location.reload()}
+        LoadGraph()
+        profil.style.visibility = "visible"
     } else {
         login.style.visibility = "visible"
     }
 }
 
 
-function getCookie(cname) {
+export function getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
     for(let i = 0; i < ca.length; i++) {
@@ -38,4 +44,8 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function deletCookie(nom) {
+    document.cookie = nom + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }

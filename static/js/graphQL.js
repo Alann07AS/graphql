@@ -45,43 +45,45 @@ export function Login(log, pws) {
     })
     .then(response => {return response.json()})
     .then(data => {
+        console.log(data);
         if (data.error) {
+            if (data.error === "") {
+                Login(log, pxs)
+                return
+            }
             console.log(data.error);
             LoginErr(data.error)
             return
         }
-const queryidbymail = `
-{
-    user(where: {email: {_eq: "${log.toLowerCase()}"}}){
-        login
-    }
-}
-`;
-const queryidbyName = `
-{
-    user(where: {login: {_eq: "${log}"}}){
-        login
-    }
-}
-`;
+        const queryidbymail = `
+        {
+            user(where: {email: {_eq: "${log.toLowerCase()}"}}){
+                login
+            }
+        }
+        `;
+        const queryidbyName = `
+        {
+            user(where: {login: {_eq: "${log}"}}){
+                login
+            }
+        }
+        `;
         Query(data, queryidbyName).then((p)=>{
             const id = p.data.user[0]
-            if (!id) {
-                Query(data, queryidbymail).then((p2)=>{
-                const id2 = p2.data.user[0]
-                if (id2) {
-                    setCookie("jwt", data, 1)
-                    setCookie("userLogin", id2.login, 1)
-                    window.location.reload()
-                }
-                console.log(p2);
-                })
-            } else {
+            if (id) {
                 setCookie("jwt", data, 1)
                 setCookie("userLogin", id.login, 1)
                 window.location.reload()
             }
-            console.log(p);
+        })
+        Query(data, queryidbymail).then((p2)=>{
+            const id2 = p2.data.user[0]
+            if (id2) {
+                setCookie("jwt", data, 1)
+                setCookie("userLogin", id2.login, 1)
+                window.location.reload()
+            }
         })
     })
     .catch(error => console.error(error));
