@@ -1,19 +1,91 @@
 import { LoginErr } from "./login.js";
 
-export const queryXp = `
-    {
-    xp_view(where: {user: {login: {_eq: "Alann"}}}) {
-        user {
-            login
-        }
-        amount
-        path
-        event {
-            createdAt
-        }
+export const QUERY = `
+{
+    transaction(
+      where: {eventId: {_eq: 32}, type: {_eq: "xp"}}
+      order_by: {createdAt: asc}
+    ) {
+          createdAt
+      path
+      amount
+      object {
+        name
+      }
     }
+    user {
+      attrs
     }
-`;
+    skill_Go: transaction_aggregate(where: {type: {_eq: "skill_go"}}) {
+      aggregate {
+        max {
+          amount
+        }
+      }
+    }
+    skill_HTML: transaction_aggregate(where: {type: {_eq: "skill_html"}}) {
+      aggregate {
+        max {
+          amount
+        }
+      }
+    }
+    skill_CSS: transaction_aggregate(where: {type: {_eq: "skill_css"}}) {
+      aggregate {
+        max {
+          amount
+        }
+      }
+    }
+    skill_JS: transaction_aggregate(where: {type: {_eq: "skill_js"}}) {
+      aggregate {
+        max {
+          amount
+        }
+      }
+    }
+    skill_SQL: transaction_aggregate(where: {type: {_eq: "skill_sql"}}) {
+      aggregate {
+        max {
+          amount
+        }
+      }
+    }
+    current_lvl: transaction_aggregate(
+      where: {type: {_eq: "level"}, eventId: {_eq: 32}}
+    ) {
+      aggregate {
+        max {
+          amount
+        }
+      }
+    }
+    xp_total: transaction_aggregate(where: {type: {_eq: "xp"}, eventId: {_eq: 32}}) {
+      aggregate {
+        sum {
+          amount
+        }
+      }
+    }
+    up_total: transaction_aggregate(where: {type: {_eq: "up"}, eventId: {_eq: 32}}) {
+      aggregate {
+        sum {
+          amount
+        }
+      }
+    }
+    down_total: transaction_aggregate(
+      where: {type: {_eq: "down"}, eventId: {_eq: 32}}
+    ) {
+      aggregate {
+        sum {
+          amount
+        }
+      }
+    }
+  }
+    
+`
 
 export function Query(jwt, query) {
     return fetch("https://zone01normandie.org/api/graphql-engine/v1/graphql", {

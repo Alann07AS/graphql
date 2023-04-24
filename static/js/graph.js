@@ -40,7 +40,6 @@ class GraphSVG {
         this.MinY = objGD.MinY
         this.MaxY = objGD.MaxY
         this.Curves = objGD.Curves
-        console.log(objGD);
     }
 
     update() {
@@ -55,7 +54,6 @@ class GraphSVG {
             this.createAxe(o.x, o.y, o.x, h*0.05),//axe y
             this.createText(this.TitleY, o.x/2, h/2, "", "writing-mode: sideways-lr;"),
             this.createText(this.TitleX, w/2 , (h+o.y)/2, "", ""),
-            this.createText(this.Title, w/2 , (h-o.y)/2, "", "font-weight: 900;"),
             this.createText(this.Title, w/2 , (h-o.y)/2, "", "font-weight: 900;"),
         )
 
@@ -74,11 +72,10 @@ class GraphSVG {
             const echellY = (h*0.9)/((this.Data.MaxY !== undefined ? this.Data.MaxY : Math.max(...Ys)) - minY)
             const ofsetX = (w*0.05)
             const ofsetY = (h*0.05)
-            console.log(minY);
             const Graph = this.createGroup(
                 this.createPath("", ...c.map((p)=>{return [(p.X-minX)*echellX+ofsetX, this.APY(echellY, p.Y-minY, h, ofsetY)]}).flat()),
                 ...c.map((p)=>{
-                    return this.createPoint((p.X-minX)*echellX+ofsetX, this.APY(echellY, p.Y-minY, h, ofsetY), p.R, p.Title, eval("("+p.OnClick+")"), p.Css)
+                    return this.createPoint((p.X-minX)*echellX+ofsetX, this.APY(echellY, p.Y-minY, h, ofsetY), p.R, p.Title, (p.OnClick || (()=>{})), p.Css) // eval("("+p.OnClick+")")
                 })
             )
             this.addToSvg(Graph)
@@ -95,6 +92,7 @@ class GraphSVG {
             g.appendChild(el)
         })
         g.classList.add("GraphSVG_G"+this.listGroups.length)
+        g.classList.add("GraphSVG_G")
         this.listGroups.push(g)
         
         return g
@@ -111,6 +109,7 @@ class GraphSVG {
         circle.setAttribute("style", css)
         circle.addEventListener("click", onclick)
         circle.classList.add("GraphSVG_S"+this.listCircles.length)
+        circle.classList.add("GraphSVG_S")
         this.listCircles.push(circle)        
         return circle
     }
@@ -127,6 +126,7 @@ class GraphSVG {
             return acc.concat(compt%1>0?" ":" L ", currentValue.toString())
         }, "M ".concat(p1.toString(), " ", p2.toString())))
         p.classList.add("GraphSVG_P"+this.listPaths.length)
+        p.classList.add("GraphSVG_P")
         this.listPaths.push(p)
         
         return p
@@ -140,6 +140,7 @@ class GraphSVG {
         t.setAttribute("text-anchor", "middle")
         t.setAttribute("style", css)
         t.classList.add("GraphSVG_T"+this.listTexts.length)
+        t.classList.add("GraphSVG_T")
         this.listTexts.push(t)
         
         return t
@@ -153,6 +154,7 @@ class GraphSVG {
         l.setAttribute("y2", y2)
         l.setAttribute("style", css)
         l.classList.add("GraphSVG_A"+this.listAxes.length)
+        l.classList.add("GraphSVG_A")
         this.listAxes.push(l)
         
         return l

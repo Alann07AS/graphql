@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/carousel.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="static/img/z01icon.png">
     <script src="./static/js/init.js" type="module" defer></script>
     <title>Z01_Profile_Viewer</title>
 </head>
 <body>
+    <!-- <div class="loader"></div> -->
     <main id="login" style="visibility: hidden;">
         <form id="login-form">
             <img src="./static/img/z01icon.png" alt="">
@@ -24,10 +26,29 @@
     <main id="profil" style="visibility: hidden;">
         <header>
             <img src="./static/img/z01icon.png" alt="">
-            <h2 id="title"></h2>
+            <h2 id="title">ZONE 01 Profile Viewer</h2>
             <button id="logout">Logout</button>
         </header>
-        <div id="projectgraph"></div>
+        <div id="panel">
+            <div id="lvl">
+                <img src="" alt="" id="pp">
+                <div id="datalvl">
+                    <div class="prenom"><span>FirstName: </span><span id="prenom" class="num"></span></div>
+                    <div class="nom"><span>LastName: </span><span id="nom" class="num"></span></div>
+                    <div class="lvls"><span>LVL: </span><span id="lvls" class="num"></span></div>
+                    <div class="xps"><span>XP: </span><span id="xps" class="num"></span></div>
+                </div>
+            </div>
+            <div id="projectgraph">
+                
+            </div>
+            <div id="ratiograph">
+                    
+            </div>
+            <div id="skillgraph">
+                    
+            </div>
+        </div>
     </main>
 </body>
 </html>

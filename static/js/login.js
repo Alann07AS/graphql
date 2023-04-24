@@ -1,5 +1,5 @@
 import { LoadGraph } from "./allgraph.js";
-import { Login } from "./graphQL.js"
+import { Login, QUERY, Query } from "./graphQL.js"
 
 export function initLogin() {
     console.log("InitLogin");
@@ -19,12 +19,21 @@ export function LoginErr(err) {
 
 export function CheckLogin() {
     const login = document.getElementById("login")
-    if (getCookie("jwt") !=="") {
-        document.body.removeChild(login)
-        document.getElementById("title").innerText = `Welecome: ${getCookie("userLogin")}`
-        document.getElementById("logout").onclick = ()=>{deletCookie("userLogin"), deletCookie("jwt"); window.location.reload()}
-        LoadGraph()
-        profil.style.visibility = "visible"
+    const jwt = getCookie("jwt")
+    if (jwt !=="") {
+        Query(jwt, QUERY).then((data)=>{
+            data = data.data
+            document.body.removeChild(login)
+            document.getElementById("prenom").innerText = data.user[0].attrs.firstName
+            document.getElementById("nom").innerText = data.user[0].attrs.lastName
+            document.getElementById("logout").onclick = ()=>{deletCookie("userLogin"), deletCookie("jwt"); window.location.reload()}
+            document.getElementById("pp").src = data.user[0].attrs.image
+            const formatter = new Intl.NumberFormat('fr-FR', {})
+            document.getElementById("xps").innerText = formatter.format(parseInt(data.xp_total.aggregate.sum.amount ))
+            document.getElementById("lvls").innerText = data.current_lvl.aggregate.max.amount
+            LoadGraph(data)
+            profil.style.visibility = "visible"
+        })
     } else {
         login.style.visibility = "visible"
     }

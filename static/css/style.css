@@ -1,5 +1,11 @@
 :root {
     --color-green: #9bcb48;
+    --color-red: #ff0000;
+}
+
+@font-face {
+    font-family: "num";
+    src: url("../font/DS-DIGII.TTF");
 }
 
 body, html {
@@ -58,7 +64,123 @@ header > * {
     margin: 0;
 }
 
+#graph {
+    width: 100%;
+}
+
+#panel {
+    margin: 50px;
+    width: 90%;
+    display: flex;
+}
+
+@media (max-width: 1280px) {
+    #panel {
+        flex-direction: column;
+    }
+}
+
+#panel > * {
+    width: 100%;
+    margin: 20px;
+}
+
 #projectgraph {
     height: 500px;
-    width: 50%;
+    width: 100%;
+    background-color: #727272;
+    border-radius: 10px;
 }
+
+#pp {
+    max-height: 100%;
+    border-radius: 50%;
+    grid-area: pp;
+    transform: scale(1.1);
+    box-shadow: 3px 0px 8px black;
+}
+
+#datalvl {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template: "prenom nom"
+                   "lvls xps";
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+}
+#datalvl > * {
+    height: 100%;
+    width: 100%;
+}
+
+.num {
+    font-family: 'num';
+}
+
+#ratiograph {
+    
+}
+
+#skillgraph {
+}
+
+
+#lvl {
+    display: flex;
+    height: 40%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.714);
+    border-radius: 10px;
+}
+
+
+
+.prenom {
+    grid-area: prenom;
+}
+.nom {
+    grid-area: nom;
+}
+.lvls {
+    grid-area: lvls;
+}
+.xps {
+    grid-area: xps;
+}
+
+
+
+.loader {
+    border: 4px solid rgba(0, 0, 0, .1);
+    border-left-color: transparent;
+    border-radius: 50%;
+  }
+  
+  .loader {
+    border: 4px solid rgba(0, 0, 0, .1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .loader {
+    border: 4px solid rgba(0, 0, 0, .1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+    animation: spin89345 1s linear infinite;
+  }
+  
+  @keyframes spin89345 {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
