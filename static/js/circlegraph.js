@@ -27,6 +27,7 @@ export class CircleGraph {
 
           .text {
             fill: ${color};
+            font-family: CordiaUPC;
           }
           
           @keyframes progress {
@@ -45,7 +46,6 @@ export class CircleGraph {
         this.svg.innerHTML = "";
         const info = this.div.getBoundingClientRect();
         this.size = (info.height<info.width?info.height:info.width)
-        console.log(info.height, info.width);
         this.svg.setAttribute("height", this.size);
         this.svg.setAttribute("width", this.size);
         const radius = this.size*0.9/2;
@@ -77,7 +77,6 @@ export class CircleGraph {
         t2.textContent = this.title?this.title:""
         t2.style.fontSize = `${this.size*0.16}px`;
         this.svg.appendChild(t2);
-        console.log(t2.getBBox().height+16);
         t2.setAttribute("x", this.size/2-t2.getBBox().width/2)
         t2.setAttribute("y", this.size/3*2)
         t2.classList.add("text")

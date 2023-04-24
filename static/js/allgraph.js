@@ -25,6 +25,21 @@ const GRdata =
 `
 const projectgraph = new GraphSVG(GRdata, document.getElementById("projectgraph"))
 const ratioGraph = new RatioVS(datarow.up_total.aggregate.sum.amount, datarow.down_total.aggregate.sum.amount ,document.getElementById("ratiograph"))
-const skilGraph = new CircleGraph(datarow.skill_Go.aggregate.max.amount/100 ,document.getElementById("skillgraph"))
-
+console.log(datarow);
+const skills = []
+const skillsName = []
+datarow.skills.nodes.forEach((v)=>{
+    if (!skillsName.includes(v.type) && v.amount != 0) {
+        skills.push(v)
+        skillsName.push(v.type)
+    }
+})
+const skillsDiv = document.getElementById("skillsgraph")
+skills.sort((a,b) => b.amount-a.amount)
+skills.forEach((skill)=>{
+    const div = document.createElement("div")
+    div.id = skill.type
+    skillsDiv.appendChild(div)
+    new CircleGraph(skill.amount/100, div, skill.type)
+})
 }

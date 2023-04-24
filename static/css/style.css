@@ -72,13 +72,9 @@ header > * {
     margin: 50px;
     width: 90%;
     display: flex;
+    flex-direction: column;
 }
 
-@media (max-width: 1280px) {
-    #panel {
-        flex-direction: column;
-    }
-}
 
 #panel > * {
     width: 100%;
@@ -121,12 +117,20 @@ header > * {
 }
 
 #ratiograph {
-    
+    max-width: 100%;
 }
 
-#skillgraph {
+#skillsgraph {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fill, 120px);
+    overflow: auto;
+    max-width: 100%;
 }
 
+#skillsgraph > * {
+    margin: 10px;
+}
 
 #lvl {
     display: flex;

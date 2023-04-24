@@ -16,8 +16,7 @@ export class RatioVS {
         this.rect2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         this.update()
         const th = this
-        nodeHtml.addEventListener("resize", ()=>{
-            console.log("update");
+        window.addEventListener("resize", ()=>{
             th.update()
         })
     }
