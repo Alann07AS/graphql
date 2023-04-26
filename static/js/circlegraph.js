@@ -66,7 +66,7 @@ export class CircleGraph {
         this.svg.appendChild(p);
 
         const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.style.fontSize = `${this.size*0.16}px`;
+        t.style.fontSize = `${this.size*0.008}em`;
         t.textContent = `${Math.round((this.value*100)*10)/10}%`
         this.svg.appendChild(t);
         t.setAttribute("x", this.size/2-t.getBBox().width/2)
@@ -75,7 +75,7 @@ export class CircleGraph {
 
         const t2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         t2.textContent = this.title?this.title:""
-        t2.style.fontSize = `${this.size*0.16}px`;
+        t2.style.fontSize = `${this.size*0.008}em`;
         this.svg.appendChild(t2);
         t2.setAttribute("x", this.size/2-t2.getBBox().width/2)
         t2.setAttribute("y", this.size/3*2)
