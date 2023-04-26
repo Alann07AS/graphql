@@ -40,6 +40,6 @@ skills.forEach((skill)=>{
     const div = document.createElement("div")
     div.id = skill.type
     skillsDiv.appendChild(div)
-    new CircleGraph(skill.amount/100, div, skill.type)
+    new CircleGraph(skill.amount/100, div, skill.type, "white")
 })
 }

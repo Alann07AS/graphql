@@ -18,7 +18,7 @@ export const QUERY = `
   }
   skills: transaction_aggregate(
     where: {type: {_regex: "skill_.*" }}
-      order_by: {createdAt: desc}
+      order_by: {amount: desc}
   ){
     nodes {
       amount
